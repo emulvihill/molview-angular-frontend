@@ -1,0 +1,45 @@
+<form [formGroup]="moodForm" novalidate (ngSubmit)="onSubmit()">
+<mat-card-content>
+
+  <mat-card-header>
+    <mat-card-title>Track Mood</mat-card-title>
+  </mat-card-header>
+
+  <div class="row">
+    <div class="col">
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Name" formControlName="name">
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Mood" formControlName="mood">
+      </mat-form-field>
+    </div>
+  </div>
+
+  <mat-card class="time-of-occurrence">
+    <mat-card-header>
+      <mat-card-title>Time Of Occurrence</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col">
+          <mat-radio-group formControlName="time_of_occurrence">
+            <mat-radio-button value="three_ago">Three Days Ago</mat-radio-button>
+            <mat-radio-button value="two_ago">Two Days Ago</mat-radio-button>
+            <mat-radio-button value="one_ago">Yesterday</mat-radio-button>
+            <mat-radio-button value="today">Today</mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit">Record Mood</button>
+    </mat-card-actions>
+  </mat-card>
+</mat-card-content>
+</form>
