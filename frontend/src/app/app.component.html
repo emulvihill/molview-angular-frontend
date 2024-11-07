@@ -1,12 +1,18 @@
-<style>
-
-</style>
-
 <main class="main">
-  <div class="content">
-      <moods></moods>
-      <mood-tracker></mood-tracker>
+  <div class="flex-container">
+    <mat-card class="left-buttons">
+      <button mat-button (click)="setRenderMode('sticks')">Sticks</button>
+      <button mat-button (click)="setRenderMode('ball_and_stick')">Balls</button>
+      <button mat-button (click)="setRenderMode('space_fill')">Blobs</button>
+      <button mat-button (click)="setSelectionMode('identify')">Identify</button>
+      <button mat-button (click)="setSelectionMode('distance')">Distance</button>
+      <button mat-button (click)="setSelectionMode('rotation')">Rotation</button>
+      <button mat-button (click)="setSelectionMode('torsion')">Torsion</button>
+    </mat-card>
+    <div class="molview-container">
+      <molview [renderMode]="renderMode" [selectionMode]="selectionMode"></molview>
+    </div>
   </div>
 </main>
 
-<router-outlet/>
+<router-outlet />
