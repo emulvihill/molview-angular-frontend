@@ -1,5 +1,6 @@
 import {AfterViewInit, Component, Input, OnInit} from "@angular/core";
-import {MolView, ConstructorParams, MolViewRenderMode, MolViewSelectionMode} from "wglmolview";
+import {MolView, ConstructorParams, ContextInfo,
+  MolViewRenderMode, MolViewSelectionMode} from "wglmolview";
 
 @Component({
   selector: 'molview',
@@ -42,16 +43,18 @@ CONECT   13    6
 END
 `;
 
-  private mv?: MolView;
+  private params: ConstructorParams =
+    {domElement: "viewport", infoElement: "info", pdbData: this.pdb,
+      onInfoUpdated: (info: ContextInfo) => {console.log(info)}
+    };
+
+  private mv?:MolView;
 
   constructor() {
   }
 
   ngAfterViewInit(): void {
-    const params: ConstructorParams =
-      {domElement: "viewport", infoElement: "info", pdbData: this.pdb};
-
-    this.mv = new MolView(params);
+    this.mv = new MolView(this.params);
     }
 
   @Input() set renderMode(mode: MolViewRenderMode) {
@@ -63,6 +66,12 @@ END
   @Input() set selectionMode(mode: MolViewSelectionMode) {
     if (this.mv) {
       this.mv.setSelectionMode(mode);
+    }
+  }
+
+  @Input() set pdbData(data: string) {
+    if (this.mv) {
+      this.mv.setPDBData(data);
     }
   }
 
