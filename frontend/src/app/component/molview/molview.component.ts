@@ -1,11 +1,11 @@
 import {AfterViewInit, Component, Input, OnInit} from "@angular/core";
-import {MolView, ConstructorParams, ContextInfo,
-  MolViewRenderMode, MolViewSelectionMode} from "wglmolview";
+import {MolView, ConstructorParams, ContextInfo, MolViewRenderMode, MolViewSelectionMode} from "wglmolview";
+import {MatCardModule} from '@angular/material/card';
 
 @Component({
   selector: 'molview',
   standalone: true,
-  imports: [],
+  imports: [MatCardModule],
   templateUrl: './molview.component.html',
   styleUrl: './molview.component.css'
 })
@@ -44,11 +44,10 @@ END
 `;
 
   private params: ConstructorParams =
-    {domElement: "viewport", infoElement: "info", pdbData: this.pdb,
-      onInfoUpdated: (info: ContextInfo) => {console.log(info)}
-    };
+    {domElement: "viewport", pdbData: this.pdb, onInfoUpdated: (info: ContextInfo) => {this.info = info.message||""}};
 
   private mv?:MolView;
+  public info: string = "";
 
   constructor() {
   }
@@ -58,22 +57,14 @@ END
     }
 
   @Input() set renderMode(mode: MolViewRenderMode) {
-    if (this.mv) {
-      this.mv.setRenderMode(mode);
-    }
+      this.mv?.setRenderMode(mode);
   }
 
   @Input() set selectionMode(mode: MolViewSelectionMode) {
-    if (this.mv) {
-      this.mv.setSelectionMode(mode);
-    }
+      this.mv?.setSelectionMode(mode);
   }
 
   @Input() set pdbData(data: string) {
-    if (this.mv) {
-      this.mv.setPDBData(data);
-    }
+      this.mv?.setPDBData(data);
   }
-
-
 }
