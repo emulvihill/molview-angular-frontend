@@ -1,17 +1,17 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from "@angular/core/testing";
 
-import { MoodService } from './mood.service';
 import {provideZoneChangeDetection} from "@angular/core";
 import {ApolloTestingModule} from "apollo-angular/testing";
+import {AtomInfoService} from "./atom.info.service";
 
-describe('MoodService', () => {
-  let service: MoodService;
+describe('AtomInfoService', () => {
+  let service: AtomInfoService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [provideZoneChangeDetection()],
       imports: [ApolloTestingModule]});
-    service = TestBed.inject(MoodService);
+    service = TestBed.inject(AtomInfoService);
   });
 
   it('should be created', () => {

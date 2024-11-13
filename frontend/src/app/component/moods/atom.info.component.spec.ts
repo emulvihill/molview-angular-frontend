@@ -1,11 +1,11 @@
-import {TestBed} from '@angular/core/testing';
+import {TestBed} from "@angular/core/testing";
 
-import {MoodsComponent} from './moods.component';
 import {ApolloTestingController, ApolloTestingModule} from "apollo-angular/testing";
 import {provideZoneChangeDetection} from "@angular/core";
-import {MoodsDocument} from "../../../graphql/generated";
+import {GetAtomInfoDocument} from "../../../graphql/generated";
+import {AtomInfoComponent} from "./atom.info.component";
 
-describe('MoodsComponent', async () => {
+describe('AtomInfoComponent', async () => {
   let controller: ApolloTestingController;
 
   beforeEach(() => {
@@ -23,7 +23,7 @@ describe('MoodsComponent', async () => {
 
   it('expect and answer', async () => {
     //Scaffold the component
-    let fixture = TestBed.createComponent(MoodsComponent);
+    let fixture = TestBed.createComponent(AtomInfoComponent);
     await fixture.whenStable();
 
     let component = fixture.componentInstance;
@@ -32,12 +32,12 @@ describe('MoodsComponent', async () => {
     // The following `expectOne()` will match the operation's document.
     // If no requests or multiple requests matched that document
     // `expectOne()` would throw.
-    const op = controller.expectOne(MoodsDocument);
+    const op = controller.expectOne(GetAtomInfoDocument);
 
     // Respond with mock data, causing Observable to resolve.
     op.flush({
       data: {
-        moods: [{id: 1, name: "EJM", date:"", mood: "Good"}]
+        info: "FUN"
       },
     });
 

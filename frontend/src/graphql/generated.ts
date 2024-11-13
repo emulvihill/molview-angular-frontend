@@ -17,83 +17,36 @@ export type Scalars = {
   Float: { input: number; output: number; }
 };
 
-export type Mood = {
-  __typename?: 'Mood';
-  date: Scalars['String']['output'];
-  id: Scalars['Int']['output'];
-  mood: Scalars['String']['output'];
-  name: Scalars['String']['output'];
-};
-
-export type MoodInput = {
-  date?: InputMaybe<Scalars['String']['input']>;
-  mood: Scalars['String']['input'];
-  name: Scalars['String']['input'];
-};
-
-export type Mutation = {
-  __typename?: 'Mutation';
-  createMood: Mood;
-};
-
-
-export type MutationCreateMoodArgs = {
-  mood: MoodInput;
-};
-
 export type Query = {
   __typename?: 'Query';
-  moods: Array<Mood>;
+  atomInfo: Scalars['String']['output'];
 };
 
-export type CreateMoodMutationVariables = Exact<{
-  mood: MoodInput;
+
+export type QueryAtomInfoArgs = {
+  atomId: Scalars['Int']['input'];
+  pdbFile: Scalars['String']['input'];
+};
+
+export type GetAtomInfoQueryVariables = Exact<{
+  pdbFile: Scalars['String']['input'];
+  atomId: Scalars['Int']['input'];
 }>;
 
 
-export type CreateMoodMutation = { __typename?: 'Mutation', createMood: { __typename?: 'Mood', name: string, mood: string, date: string } };
+export type GetAtomInfoQuery = { __typename?: 'Query', atomInfo: string };
 
-export type MoodsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type MoodsQuery = { __typename?: 'Query', moods: Array<{ __typename?: 'Mood', id: number, name: string, date: string, mood: string }> };
-
-export const CreateMoodDocument = gql`
-    mutation createMood($mood: MoodInput!) {
-  createMood(mood: $mood) {
-    name
-    mood
-    date
-  }
+export const GetAtomInfoDocument = gql`
+    query GetAtomInfo($pdbFile: String!, $atomId: Int!) {
+  atomInfo(pdbFile: $pdbFile, atomId: $atomId)
 }
     `;
 
   @Injectable({
     providedIn: 'root'
   })
-  export class CreateMoodGQL extends Apollo.Mutation<CreateMoodMutation, CreateMoodMutationVariables> {
-    document = CreateMoodDocument;
-    
-    constructor(apollo: Apollo.Apollo) {
-      super(apollo);
-    }
-  }
-export const MoodsDocument = gql`
-    query Moods {
-  moods {
-    id
-    name
-    date
-    mood
-  }
-}
-    `;
-
-  @Injectable({
-    providedIn: 'root'
-  })
-  export class MoodsGQL extends Apollo.Query<MoodsQuery, MoodsQueryVariables> {
-    document = MoodsDocument;
+  export class GetAtomInfoGQL extends Apollo.Query<GetAtomInfoQuery, GetAtomInfoQueryVariables> {
+    document = GetAtomInfoDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

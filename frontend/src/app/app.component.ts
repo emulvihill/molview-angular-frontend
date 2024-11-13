@@ -1,31 +1,29 @@
-import {Component} from '@angular/core';
-import {RouterOutlet} from '@angular/router';
-import {MoodService} from "./service/mood.service";
-import {MoodsComponent} from "./component/moods/moods.component";
+import {Component} from "@angular/core";
+import {RouterOutlet} from "@angular/router";
 import {CommonModule} from "@angular/common";
-import {MoodTrackerComponent} from "./component/mood-tracker/mood-tracker.component";
 import {MatButton} from "@angular/material/button";
-import {MatCard, MatCardActions, MatCardContent, MatCardHeader, MatCardTitle} from "@angular/material/card";
+import {MatCard} from "@angular/material/card";
 import {MolViewComponent} from "./component/molview/molview.component";
 
 import {MolViewRenderMode, MolViewSelectionMode} from "wglmolview";
+import {AtomInfoService} from "./service/atom.info.service";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, MoodsComponent, MoodTrackerComponent, MatButton, MatCard, MolViewComponent],
+  imports: [CommonModule, RouterOutlet, MatButton, MatCard, MolViewComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 
 export class AppComponent {
-  moodService: MoodService;
+  atomInfoService: AtomInfoService;
 
   renderMode: MolViewRenderMode = "ball_and_stick";
   selectionMode: MolViewSelectionMode = "identify";
 
-  constructor(moodService: MoodService) {
-    this.moodService = moodService;
+  constructor(atomInfoService: AtomInfoService) {
+    this.atomInfoService = atomInfoService;
   }
 
   setRenderMode(mode: MolViewRenderMode) {
