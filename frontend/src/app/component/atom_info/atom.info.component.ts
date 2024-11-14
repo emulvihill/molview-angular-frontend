@@ -5,7 +5,7 @@ import {AtomInfoService} from "../../service/atom.info.service";
 @Component({
   selector: 'atomInfo',
   template: `
-      <div>AtomInfo: {{ info }}</div>
+      <div>{{ info }}</div>
   `,
   standalone: true
 })
