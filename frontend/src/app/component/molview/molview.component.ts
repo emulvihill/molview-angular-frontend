@@ -1,11 +1,12 @@
 import {AfterViewInit, Component, Input, OnInit} from "@angular/core";
 import {MolView, ConstructorParams, ContextInfo, MolViewRenderMode, MolViewSelectionMode} from "wglmolview";
 import {MatCardModule} from '@angular/material/card';
+import {AtomInfoComponent} from "../atom_info/atom.info.component";
 
 @Component({
   selector: 'molview',
   standalone: true,
-  imports: [MatCardModule],
+  imports: [MatCardModule, AtomInfoComponent],
   templateUrl: './molview.component.html',
   styleUrl: './molview.component.css'
 })
@@ -44,10 +45,18 @@ END
 `;
 
   private params: ConstructorParams =
-    {domElement: "viewport", pdbData: this.pdb, onInfoUpdated: (info: ContextInfo) => {this.info = info.message||""}};
+    {domElement: "viewport", pdbData: this.pdb, onInfoUpdated: (info: ContextInfo) => {
+      this.info = info.message||"";
+      const id = parseInt(info?.atoms?.[0]?.id?.replace("atom", ""));
+      this.selectedAtomId = !isNaN(id) ? id : 0;
+      this.data = this.pdb;
+    }};
 
   private mv?:MolView;
   public info: string = "";
+
+  public selectedAtomId: number = 0;
+  public data: string = "";
 
   constructor() {
   }
@@ -66,5 +75,6 @@ END
 
   @Input() set pdbData(data: string) {
       this.mv?.setPDBData(data);
+      this.data = data;
   }
 }

@@ -2,3 +2,6 @@
 <mat-card appearance="outlined">
   <mat-card-content>{{info}}</mat-card-content>
 </mat-card>
+<mat-card class="right-card">
+  <atomInfo [atomId]="selectedAtomId" [pdbFile]="data"></atomInfo>
+</mat-card>

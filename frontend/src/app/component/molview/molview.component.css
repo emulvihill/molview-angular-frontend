@@ -2,3 +2,9 @@
   width: 100%;
   height: 100%;
 }
+.right-card {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 550px
+}
