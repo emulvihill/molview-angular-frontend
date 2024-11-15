@@ -6,6 +6,7 @@ import {provideRouter} from "@angular/router";
 import {routes} from "./app.routes";
 import {provideHttpClient} from "@angular/common/http";
 import {NoopAnimationsModule} from "@angular/platform-browser/animations";
+import {MarkdownModule} from "ngx-markdown";
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -14,7 +15,7 @@ describe('AppComponent', () => {
         provideRouter(routes),
         provideHttpClient(),
         graphqlProvider],
-      imports: [NoopAnimationsModule, AppComponent],
+      imports: [NoopAnimationsModule, AppComponent, MarkdownModule.forRoot()],
     }).compileComponents();
   });
 

@@ -2,15 +2,16 @@ import {TestBed} from "@angular/core/testing";
 
 import {ApolloTestingController, ApolloTestingModule} from "apollo-angular/testing";
 import {provideZoneChangeDetection} from "@angular/core";
-import {GetAtomInfoDocument} from "../../../graphql/generated";
 import {AtomInfoComponent} from "./atom.info.component";
+import {ATOM_INFO} from "../../../graphql/query";
+import {MarkdownModule, provideMarkdown} from "ngx-markdown";
 
 describe('AtomInfoComponent', async () => {
   let controller: ApolloTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [provideZoneChangeDetection()],
+      providers: [provideZoneChangeDetection(), provideMarkdown()],
       imports: [ApolloTestingModule],
     });
 
@@ -32,7 +33,7 @@ describe('AtomInfoComponent', async () => {
     // The following `expectOne()` will match the operation's document.
     // If no requests or multiple requests matched that document
     // `expectOne()` would throw.
-    const op = controller.expectOne(GetAtomInfoDocument);
+    const op = controller.expectOne(ATOM_INFO);
 
     // Respond with mock data, causing Observable to resolve.
     op.flush({

@@ -22,7 +22,7 @@ export class AtomInfoComponent implements OnChanges, OnDestroy {
 
   info: string = "";
 
-  private querySubscription!: Subscription;
+  querySubscription!: Subscription;
 
   constructor(private readonly atomInfoService: AtomInfoService,
               private mdService:MarkdownService,

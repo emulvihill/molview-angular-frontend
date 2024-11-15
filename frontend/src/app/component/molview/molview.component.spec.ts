@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MolViewComponent } from './molview.component';
+import {provideMarkdown} from "ngx-markdown";
+import {graphqlProvider} from "../../graphql.provider";
+import {provideHttpClient} from "@angular/common/http";
 
 describe('MolViewComponent', () => {
   let component: MolViewComponent;
@@ -9,7 +12,8 @@ describe('MolViewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MolViewComponent]
+      imports: [MolViewComponent],
+      providers:[graphqlProvider, provideHttpClient(), provideMarkdown()]
     })
     .compileComponents();
 
