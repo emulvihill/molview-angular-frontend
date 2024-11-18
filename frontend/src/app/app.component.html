@@ -10,8 +10,16 @@
       <button mat-button (click)="setSelectionMode('torsion')">Torsion</button>
     </mat-card>
     <div class="molview-container">
-      <molview [renderMode]="renderMode" [selectionMode]="selectionMode"></molview>
+      <molview [pdbData]="pdbData.at(chosenIndex)" [renderMode]="renderMode" [selectionMode]="selectionMode"></molview>
     </div>
+  </div>
+  <div>
+    <h1>All PDB Data</h1>
+    <ul>
+      <li *ngFor="let pdb of pdbData">
+        {{pdb.name}}: {{pdb.compound}}
+      </li>
+    </ul>
   </div>
 </main>
 
