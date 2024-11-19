@@ -15,7 +15,7 @@ export class PdbDataService {
   getAllPdbData(): Observable<PdbData[]> {
     return this.apollo
       .query<any>({
-        query: ALL_PDB_DATA,
+        query: ALL_PDB_DATA
       })
       .pipe(
         map((result: ApolloQueryResult<any>) => result.data.allPdbData as PdbData[]),
@@ -26,7 +26,7 @@ export class PdbDataService {
     return this.apollo
       .mutate({
         mutation: CREATE_PDB_DATA,
-        variables: input,
+        variables: input
       })
       .pipe(
         map((result: MutationResult<any>) => result.data.createPdbData as PdbData),
@@ -37,7 +37,7 @@ export class PdbDataService {
     return this.apollo
       .query<any>({
         query: FIND_PDB_DATA_BY_ID,
-        variables: {id},
+        variables: {id}
       })
       .pipe(
         map((result: ApolloQueryResult<any>) => result.data.findPdbDataById as PdbData),
@@ -48,7 +48,7 @@ export class PdbDataService {
     return this.apollo
       .mutate({
         mutation: DELETE_PDB_DATA,
-        variables: {id},
+        variables: {id}
       })
       .pipe(
         map((result: MutationResult<any>) => result.data.deletePdbData as PdbData),
