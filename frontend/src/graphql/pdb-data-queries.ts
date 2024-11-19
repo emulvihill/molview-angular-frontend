@@ -23,7 +23,7 @@ export const CREATE_PDB_DATA = gql`
 `;
 
 export const FIND_PDB_DATA_BY_ID = gql`
-  query FindPdbDataById($id: Int!) {
+  query FindPdbDataById($id: ID!) {
     findPdbDataById(id: $id) {
       id
       name
@@ -34,7 +34,7 @@ export const FIND_PDB_DATA_BY_ID = gql`
 `;
 
 export const DELETE_PDB_DATA = gql`
-  mutation DeletePdbData($id: Int!) {
+  mutation DeletePdbData($id: ID!) {
     deletePdbData(id: $id) {
       id
       name

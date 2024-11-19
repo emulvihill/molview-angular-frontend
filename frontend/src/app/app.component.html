@@ -1,4 +1,17 @@
 <main class="main">
+
+  <div>
+    <h3>Select PDB</h3>
+    <mat-form-field class="pdb-select" appearance="fill">
+      <mat-label>Select PDB Data</mat-label>
+      <mat-select [(ngModel)]="selectedPdbId" (selectionChange)="onPdbSelect($event)">
+        <mat-option *ngFor="let pdb of pdbData" [value]="pdb.id">
+          {{ pdb.compound || pdb.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
   <div class="flex-container">
     <mat-card class="left-buttons">
       <button mat-button (click)="setRenderMode('sticks')">Sticks</button>
@@ -10,17 +23,15 @@
       <button mat-button (click)="setSelectionMode('torsion')">Torsion</button>
     </mat-card>
     <div class="molview-container">
-      <molview [pdbData]="pdbData.at(chosenIndex)" [renderMode]="renderMode" [selectionMode]="selectionMode"></molview>
+      <molview [pdbData]="currentPdb" [renderMode]="renderMode" [selectionMode]="selectionMode"
+               (infoUpdated)="onInfoChange($event)"></molview>
     </div>
-  </div>
-  <div>
-    <h1>All PDB Data</h1>
-    <ul>
-      <li *ngFor="let pdb of pdbData">
-        {{pdb.name}}: {{pdb.compound}}
-      </li>
-    </ul>
+    <div class="info-container">
+      <mat-card class="info-card">
+        <atomInfo [atomId]="selectedAtomId" [pdbFile]="currentPdb?.data||''"></atomInfo>
+      </mat-card>
+    </div>
   </div>
 </main>
 
-<router-outlet />
+<router-outlet/>

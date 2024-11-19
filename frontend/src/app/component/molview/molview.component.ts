@@ -1,13 +1,12 @@
-import {AfterViewInit, Component, Input} from "@angular/core";
+import {AfterViewInit, Component, EventEmitter, Input, Output} from "@angular/core";
 import {ConstructorParams, ContextInfo, MolView, MolViewRenderMode, MolViewSelectionMode} from "wglmolview";
 import {MatCardModule} from "@angular/material/card";
-import {AtomInfoComponent} from "../atom_info/atom.info.component";
 import {PdbData} from "../../model/pdb-data.model";
 
 @Component({
   selector: "molview",
   standalone: true,
-  imports: [MatCardModule, AtomInfoComponent],
+  imports: [MatCardModule],
   templateUrl: "./molview.component.html",
   styleUrl: "./molview.component.css",
 })
@@ -15,18 +14,13 @@ export class MolViewComponent implements AfterViewInit {
 
   private params: ConstructorParams =
     {
-      domElement: "viewport", onInfoUpdated: (info: ContextInfo) => {
-        this.info = info.message || "";
-        const id = parseInt(info?.atoms?.[0]?.id?.replace("atom", ""));
-        this.selectedAtomId = !isNaN(id) ? id : 0;
-      },
+      domElement: "viewport",
+      onInfoUpdated: (info: ContextInfo) => this.infoUpdated.emit(info),
     };
 
   private mv?: MolView;
-  public info: string = "";
 
-  public selectedAtomId: number = 0;
-  private _pdbData: PdbData | undefined = undefined;
+  private _pdbData: PdbData | null = null;
 
   constructor() {
   }
@@ -35,7 +29,9 @@ export class MolViewComponent implements AfterViewInit {
     this.mv = new MolView(this.params);
   }
 
-  @Input() set pdbData(pdbData: PdbData|undefined) {
+  @Output() infoUpdated = new EventEmitter<ContextInfo>();
+
+  @Input() set pdbData(pdbData: PdbData | null) {
     this._pdbData = pdbData;
     if (this._pdbData) {
       this.mv?.setPDBData(this._pdbData.data);
@@ -44,7 +40,7 @@ export class MolViewComponent implements AfterViewInit {
     }
   }
 
-  get pdbData(): PdbData|undefined {
+  get pdbData(): PdbData | null {
     return this._pdbData;
   }
 
