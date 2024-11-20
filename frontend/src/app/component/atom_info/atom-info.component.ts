@@ -1,31 +1,36 @@
 import {Subscription} from "rxjs";
 import {ChangeDetectorRef, Component, Input, OnChanges, OnDestroy} from "@angular/core";
 import {AtomInfoService} from "../../service/atom.info.service";
-import {MarkdownComponent, MarkdownService} from "ngx-markdown";
+import {MarkdownComponent} from "ngx-markdown";
+import {NgIf} from "@angular/common";
 
 @Component({
   selector: "atomInfo",
-  template: `<div markdown [data]="info"></div>`,
+  templateUrl: 'atom-info.component.html',
+  styleUrls: ['atom-info.component.css'],
   standalone: true,
   imports: [
     MarkdownComponent,
+    NgIf,
   ],
 })
 
 export class AtomInfoComponent implements OnChanges, OnDestroy {
 
   @Input()
+  active: boolean = false;
+
+  @Input()
   pdbFile: string = "";
 
   @Input()
-  atomId: number = 0;
+  atomId: number = NaN;
 
+  loading: boolean = false;
   info: string = "";
-
   querySubscription!: Subscription;
 
   constructor(private readonly atomInfoService: AtomInfoService,
-              private mdService:MarkdownService,
               private readonly cd: ChangeDetectorRef) {
   }
 
@@ -35,8 +40,11 @@ export class AtomInfoComponent implements OnChanges, OnDestroy {
 
   private runQuery() {
     this.querySubscription?.unsubscribe();
+    if  (!this.active || !this.pdbFile || isNaN(this.atomId)) return;
+    this.loading = true;
     this.querySubscription = this.atomInfoService.getAtomInfo(this.pdbFile, this.atomId).subscribe(data => {
       this.info = data;
+      this.loading = false;
       this.cd.detectChanges();
     });
   }

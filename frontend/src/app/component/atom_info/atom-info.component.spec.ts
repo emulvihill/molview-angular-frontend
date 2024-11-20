@@ -2,7 +2,7 @@ import {TestBed} from "@angular/core/testing";
 
 import {ApolloTestingController, ApolloTestingModule} from "apollo-angular/testing";
 import {provideZoneChangeDetection} from "@angular/core";
-import {AtomInfoComponent} from "./atom.info.component";
+import {AtomInfoComponent} from "./atom-info.component";
 import {ATOM_INFO} from "../../../graphql/atom-info.queries";
 import {MarkdownModule, provideMarkdown} from "ngx-markdown";
 

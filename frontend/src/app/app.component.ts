@@ -12,7 +12,7 @@ import {PdbDataService} from "./service/pdb-data.service";
 import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatOption, MatSelect} from "@angular/material/select";
 import {FormsModule} from "@angular/forms";
-import {AtomInfoComponent} from "./component/atom_info/atom.info.component";
+import {AtomInfoComponent} from "./component/atom_info/atom-info.component";
 
 @Component({
   selector: "app-root",
@@ -33,6 +33,7 @@ export class AppComponent implements OnInit {
   selectedPdbId: number | null = null;
   currentPdb: PdbData | null = null;
   selectedAtomId: number = NaN;
+  infoMessage: string = "";
 
   constructor(atomInfoService: AtomInfoService, pdbDataService: PdbDataService) {
     this.atomInfoService = atomInfoService;
@@ -66,8 +67,8 @@ export class AppComponent implements OnInit {
   }
 
   onInfoChange(info: ContextInfo) {
-    console.log(`Atom info changed: ${info.message}`);
-
     this.selectedAtomId = parseInt(info?.atoms?.[0]?.id?.replace("atom", ""));
+    this.infoMessage = info.message||"";
+    console.log(`Atom info changed: ${this.infoMessage}`);
   }
 }

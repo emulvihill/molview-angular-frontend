@@ -21,3 +21,7 @@
 .pdb-select {
   width: 300px;
 }
+.info-message {
+  padding-inline: 30px;
+  padding-top: 30px;
+}

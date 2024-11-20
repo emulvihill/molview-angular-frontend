@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import {of, Subscription} from "rxjs";
 import {MarkdownModule, MarkdownService, provideMarkdown} from "ngx-markdown";
 import { AtomInfoService } from '../../service/atom.info.service';
-import { AtomInfoComponent } from './atom.info.component';
+import { AtomInfoComponent } from './atom-info.component';
 import {MolViewComponent} from "../molview/molview.component";
 
 describe('AtomInfoComponent', () => {
