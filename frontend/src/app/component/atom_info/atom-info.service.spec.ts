@@ -27,7 +27,7 @@ describe('AtomInfoService', () => {
   });
 
   describe('getAtomInfo', () => {
-    const pdbData = 'example.pdb';
+    const pdbId = 1;
     const atomId = 123;
     const mockResult: ApolloQueryResult<any> = {
       data: {atomInfo: "Sample Atom Info"}, error: undefined, loading: false,
@@ -37,7 +37,7 @@ describe('AtomInfoService', () => {
     it('should return the atom info if pdbData and atomId are provided', (done) => {
       apolloSpy.query.and.returnValue(of(mockResult));
 
-      service.getAtomInfo(pdbData, atomId).subscribe((result) => {
+      service.getAtomInfo(pdbId, atomId).subscribe((result) => {
         expect(result).toBe('Sample Atom Info');
         done();
       });
@@ -46,12 +46,12 @@ describe('AtomInfoService', () => {
     it('should return an empty Observable if pdbData or atomId is missing', (done) => {
       apolloSpy.query.and.returnValue(of(mockResult));
 
-      service.getAtomInfo('', atomId).subscribe((result) => {
+      service.getAtomInfo(0, atomId).subscribe((result) => {
         expect(result).toBe('');
         done();
       });
 
-      service.getAtomInfo(pdbData, 0).subscribe((result) => {
+      service.getAtomInfo(0, 0).subscribe((result) => {
         expect(result).toBe('');
         done();
       });

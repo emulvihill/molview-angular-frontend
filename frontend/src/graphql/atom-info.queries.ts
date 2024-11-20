@@ -1,7 +1,7 @@
 import { gql } from 'apollo-angular';
 
 export const ATOM_INFO = gql`
-  query AtomInfo($pdbFile: String!, $atomId: ID!) {
-    atomInfo(pdbFile: $pdbFile, atomId: $atomId)
+  query AtomInfo($pdbId: ID!, $atomId: ID!) {
+    atomInfo(pdbId: $pdbId, atomId: $atomId)
   }
 `;

@@ -10,14 +10,14 @@ import {AtomInfoService} from "./service/atom.info.service";
 import {PdbData} from "./model/pdb-data.model";
 import {PdbDataService} from "./service/pdb-data.service";
 import {MatFormField, MatLabel} from "@angular/material/form-field";
-import {MatOption, MatSelect} from "@angular/material/select";
+import {MatOption, MatSelect, MatSelectChange} from "@angular/material/select";
 import {FormsModule} from "@angular/forms";
 import {AtomInfoComponent} from "./component/atom_info/atom-info.component";
 
 @Component({
   selector: "app-root",
   standalone: true,
-  imports: [CommonModule, RouterOutlet, MatButton, MatCard, MolViewComponent, MatLabel, MatSelect, MatOption, MatFormField, FormsModule, MatCardContent, AtomInfoComponent],
+  imports: [CommonModule, RouterOutlet, MatButton, MatCard, MolViewComponent, MatLabel, MatSelect, MatOption, MatFormField, FormsModule, AtomInfoComponent],
   templateUrl: "./app.component.html",
   styleUrl: "./app.component.css",
 })
@@ -30,8 +30,8 @@ export class AppComponent implements OnInit {
   selectionMode: MolViewSelectionMode = "identify";
 
   pdbData: PdbData[] = [];
-  selectedPdbId: number | null = null;
   currentPdb: PdbData | null = null;
+  selectedPdb: number = NaN;
   selectedAtomId: number = NaN;
   infoMessage: string = "";
 
@@ -47,10 +47,10 @@ export class AppComponent implements OnInit {
     });
   }
 
-  onPdbSelect(event: any): void {
-    const selectedPdbId = event.value;
-    if (selectedPdbId !== null) {
-      this.pdbDataService.findPdbDataById(selectedPdbId).subscribe(pdb => {
+  onPdbSelect(event: MatSelectChange): void {
+    this.selectedPdb = parseInt(event.source.value);
+    if (this.selectedPdb !== null) {
+      this.pdbDataService.findPdbDataById(this.selectedPdb).subscribe(pdb => {
         this.currentPdb = pdb;
       });
     }
@@ -71,4 +71,6 @@ export class AppComponent implements OnInit {
     this.infoMessage = info.message||"";
     console.log(`Atom info changed: ${this.infoMessage}`);
   }
+
+  protected readonly NaN = NaN;
 }

@@ -12,15 +12,15 @@ export class AtomInfoService {
   constructor(private readonly apollo: Apollo) {
   }
 
-  getAtomInfo(pdbData: string, atomId: number): Observable<string> {
-    if (!pdbData || !atomId) {
+  getAtomInfo(pdbId: number, atomId: number): Observable<string> {
+    if (!pdbId || !atomId) {
       return new Observable<string>();
     }
 
     return this.apollo
       .query<any>({
         query: ATOM_INFO,
-        variables: { pdbFile: pdbData, atomId: atomId }
+        variables: { pdbId: pdbId, atomId: atomId }
       })
       .pipe(
         map((result: ApolloQueryResult<any>) => result.data.atomInfo as string)

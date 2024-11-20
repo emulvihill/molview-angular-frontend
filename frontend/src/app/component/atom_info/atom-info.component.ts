@@ -21,7 +21,7 @@ export class AtomInfoComponent implements OnChanges, OnDestroy {
   active: boolean = false;
 
   @Input()
-  pdbFile: string = "";
+  pdbId: number = NaN;
 
   @Input()
   atomId: number = NaN;
@@ -40,9 +40,9 @@ export class AtomInfoComponent implements OnChanges, OnDestroy {
 
   private runQuery() {
     this.querySubscription?.unsubscribe();
-    if  (!this.active || !this.pdbFile || isNaN(this.atomId)) return;
+    if  (!this.active || !this.pdbId || isNaN(this.atomId)) return;
     this.loading = true;
-    this.querySubscription = this.atomInfoService.getAtomInfo(this.pdbFile, this.atomId).subscribe(data => {
+    this.querySubscription = this.atomInfoService.getAtomInfo(this.pdbId, this.atomId).subscribe(data => {
       this.info = data;
       this.loading = false;
       this.cd.detectChanges();
