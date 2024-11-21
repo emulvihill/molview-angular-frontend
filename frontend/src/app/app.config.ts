@@ -7,9 +7,6 @@ import {graphqlProvider} from './graphql.provider';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import {provideMarkdown} from "ngx-markdown";
 
-localStorage.setItem("token",
-  "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0dXNlciIsImlhdCI6MTczMjA0ODE2NSwiZXhwIjoxNzMyMTM0NTY1fQ.7gHctaCwzM94wOCtOHAVB4VuQt_9p0Ql8q5pmhtPrjmMUNS9ey9OfQIn6vFgUZKKqRkmY6JgHMlvx5y2Oyrqzw");
-
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),

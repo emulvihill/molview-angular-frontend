@@ -4,8 +4,15 @@ import {ApplicationConfig, inject} from '@angular/core';
 import {ApolloClientOptions, ApolloLink, InMemoryCache} from "@apollo/client/core";
 import {setContext} from "@apollo/client/link/context";
 
-const uri = 'http://localhost:8888/graphql'; // <-- add the URL of the GraphQL server here
+// Note:
+// In localstorage:
+// = SET the url of the backend 'host', eg http://localhost:8888
+// = SET the JWT security 'token'
+const host = localStorage.getItem('host');
+const token = localStorage.getItem('token');
+
 export function apolloOptionsFactory(): ApolloClientOptions<any> {
+  const uri =  host + '/graphql';
   const httpLink = inject(HttpLink);
 
   const basic = setContext((operation, context) => ({
@@ -15,8 +22,6 @@ export function apolloOptionsFactory(): ApolloClientOptions<any> {
   }));
 
   const auth = setContext((operation, context) => {
-    const token = localStorage.getItem('token');
-
     if (token === null) {
       return {};
     } else {
