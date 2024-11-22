@@ -2,26 +2,24 @@
   display: flex;
 }
 .left-buttons {
-    padding-left: 10px;
-    padding-right: 10px;
+  display: flex;
+  flex-direction: column;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 .molview-container {
-  width: 60%;
-  aspect-ratio: 1 / 1;
-  /* Flex item will grow and shrink to fill space */
-  flex-grow: 2;
-  flex-shrink: 1;
+  width: 700px;
+  height: 700px;
+  padding-left: 25px;
+  padding-right: 25px;
 }
 .info-container {
-  width: 40%;
-  /* Flex item will grow and shrink to fill space */
-  flex-grow: 1;
-  flex-shrink: 1;
+  width: 100%;
 }
 .pdb-select {
-  width: 300px;
+  width: 100%;
+  max-width: 400px;
 }
 .info-message {
   padding-inline: 30px;
-  padding-top: 30px;
 }
