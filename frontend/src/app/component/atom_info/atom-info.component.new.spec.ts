@@ -1,23 +1,22 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from "@angular/core/testing";
 import {of, Subscription} from "rxjs";
-import {MarkdownModule, MarkdownService, provideMarkdown} from "ngx-markdown";
-import { AtomInfoService } from '../../service/atom.info.service';
-import { AtomInfoComponent } from './atom-info.component';
-import {MolViewComponent} from "../molview/molview.component";
+import {MarkdownService, provideMarkdown} from "ngx-markdown";
+import {AtomInfoService} from "../../service/atom.info.service";
+import {AtomInfoComponent} from "./atom-info.component";
 
-describe('AtomInfoComponent', () => {
+describe("AtomInfoComponent", () => {
   let component: AtomInfoComponent;
   let fixture: ComponentFixture<AtomInfoComponent>;
   let atomInfoServiceSpy: jasmine.SpyObj<AtomInfoService>;
   let markdownService: MarkdownService;
 
   beforeEach(async () => {
-    const spy = jasmine.createSpyObj('AtomInfoService', ['getAtomInfo']);
+    const spy = jasmine.createSpyObj("AtomInfoService", ["getAtomInfo"]);
     await TestBed.configureTestingModule({
       providers: [
-        { provide: AtomInfoService, useValue: spy },
-        provideMarkdown()
-      ]
+        {provide: AtomInfoService, useValue: spy},
+        provideMarkdown(),
+      ],
     }).compileComponents();
     atomInfoServiceSpy = TestBed.inject(AtomInfoService) as jasmine.SpyObj<AtomInfoService>;
     markdownService = TestBed.inject(MarkdownService);
@@ -29,21 +28,21 @@ describe('AtomInfoComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 
-  describe('ngOnChanges', () => {
-    const pdbFile = 'example.pdb';
+  describe("ngOnChanges", () => {
+    const pdbId = 1;
     const atomId = 123;
-    const mockResult = 'Sample Atom Info';
+    const mockResult = "Sample Atom Info";
 
     beforeEach(() => {
       atomInfoServiceSpy.getAtomInfo.and.returnValue(of(mockResult));
     });
 
-    it('should update info and call change detection if pdbFile and atomId are provided', () => {
-      component.pdbFile = pdbFile;
+    it("should update info and call change detection if pdbId and atomId are provided", () => {
+      component.pdbId = pdbId;
       component.atomId = atomId;
       fixture.detectChanges();
 
@@ -51,32 +50,33 @@ describe('AtomInfoComponent', () => {
       expect(atomInfoServiceSpy.getAtomInfo.calls.count()).toBe(1);
     });
 
-    it('should not update info if pdbFile or atomId is missing', () => {
-      component.pdbFile = '';
+    it("should not update info if pdbId or atomId is missing", () => {
+      component.active = true;
+      component.pdbId = NaN;
       component.atomId = atomId;
       fixture.detectChanges();
 
-      expect(component.info).toBe('');
+      expect(component.info).toBe("");
       expect(atomInfoServiceSpy.getAtomInfo.calls.count()).toBe(0);
 
-      component.pdbFile = pdbFile;
+      component.pdbId = pdbId;
       component.atomId = 0;
       fixture.detectChanges();
 
-      expect(component.info).toBe('');
+      expect(component.info).toBe("");
       expect(atomInfoServiceSpy.getAtomInfo.calls.count()).toBe(1);
     });
   });
 
-  describe('ngOnDestroy', () => {
+  describe("ngOnDestroy", () => {
     let subscriptionSpy: jasmine.Spy;
 
     beforeEach(() => {
       component.querySubscription = new Subscription();
-      subscriptionSpy = spyOn(component.querySubscription, 'unsubscribe');
+      subscriptionSpy = spyOn(component.querySubscription, "unsubscribe");
     });
 
-    it('should unsubscribe from the query subscription on destroy', () => {
+    it("should unsubscribe from the query subscription on destroy", () => {
       component.ngOnDestroy();
 
       expect(subscriptionSpy).toHaveBeenCalled();
