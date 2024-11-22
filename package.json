@@ -29,7 +29,7 @@
     "ngx-markdown": "^18.1.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
-    "wglmolview": "^0.1",
+    "wglmolview": "^0.1.1",
     "zone.js": "~0.14.10"
   },
   "devDependencies": {
