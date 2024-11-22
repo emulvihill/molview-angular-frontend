@@ -1,0 +1,8 @@
+<div id="atomInfo">
+  <div *ngIf="loading" class="spinner-wrapper">
+    <div class="spinner"></div>
+  </div>
+  <div markdown *ngIf="!loading">
+    {{ info }}
+  </div>
+</div>
