@@ -6,7 +6,7 @@ import {setContext} from "@apollo/client/link/context";
 
 // Note:
 // In localstorage:
-// = SET the url of the backend 'host', eg http://localhost:8888
+// = SET the url of the backend 'host', eg http://localhost:5000
 // = SET the JWT security 'token'
 const host = localStorage.getItem('host');
 const token = localStorage.getItem('token');
