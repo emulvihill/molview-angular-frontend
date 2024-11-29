@@ -14,11 +14,10 @@ import {FormsModule} from "@angular/forms";
 import {AtomInfoComponent} from "./component/atom_info/atom-info.component";
 
 @Component({
-  selector: "app-root",
-  standalone: true,
-  imports: [CommonModule, RouterOutlet, MatButton, MolViewComponent, MatLabel, MatSelect, MatOption, MatFormField, FormsModule, AtomInfoComponent],
-  templateUrl: "./app.component.html",
-  styleUrl: "./app.component.css",
+    selector: "app-root",
+    imports: [CommonModule, RouterOutlet, MatButton, MolViewComponent, MatLabel, MatSelect, MatOption, MatFormField, FormsModule, AtomInfoComponent],
+    templateUrl: "./app.component.html",
+    styleUrl: "./app.component.css"
 })
 
 export class AppComponent implements OnInit {

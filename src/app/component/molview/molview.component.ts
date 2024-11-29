@@ -4,11 +4,10 @@ import {MatCardModule} from "@angular/material/card";
 import {PdbData} from "../../model/pdb-data.model";
 
 @Component({
-  selector: "molview",
-  standalone: true,
-  imports: [MatCardModule],
-  templateUrl: "./molview.component.html",
-  styleUrl: "./molview.component.css",
+    selector: "molview",
+    imports: [MatCardModule],
+    templateUrl: "./molview.component.html",
+    styleUrl: "./molview.component.css"
 })
 export class MolViewComponent implements AfterViewInit {
 

@@ -5,14 +5,13 @@ import {MarkdownComponent} from "ngx-markdown";
 import {NgIf} from "@angular/common";
 
 @Component({
-  selector: "atomInfo",
-  templateUrl: 'atom-info.component.html',
-  styleUrls: ['atom-info.component.css'],
-  standalone: true,
-  imports: [
-    MarkdownComponent,
-    NgIf,
-  ],
+    selector: "atomInfo",
+    templateUrl: 'atom-info.component.html',
+    styleUrls: ['atom-info.component.css'],
+    imports: [
+        MarkdownComponent,
+        NgIf,
+    ]
 })
 
 export class AtomInfoComponent implements OnChanges, OnDestroy {
