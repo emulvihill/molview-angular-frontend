@@ -23,13 +23,13 @@
     "@angular/platform-browser": "^19.0.1",
     "@angular/platform-browser-dynamic": "^19.0.1",
     "@angular/router": "^19.0.1",
-    "@apollo/client": "~3.11.8",
-    "apollo-angular": "~7.2.1",
+    "@apollo/client": "~3.11.10",
+    "apollo-angular": "^8.0.0",
     "graphql": "~16.9.0",
-    "ngx-markdown": "^18.1.0",
-    "rxjs": "~7.8.0",
+    "ngx-markdown": "^19.0.0",
+    "rxjs": "~7.8.1",
     "tslib": "^2.3.0",
-    "wglmolview": "^0.1.1",
+    "wglmolview": "^0.1.3",
     "zone.js": "~0.15.0"
   },
   "devDependencies": {

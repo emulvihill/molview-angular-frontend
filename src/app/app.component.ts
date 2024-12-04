@@ -14,9 +14,9 @@ import {FormsModule} from "@angular/forms";
 import {AtomInfoComponent} from "./component/atom_info/atom-info.component";
 
 @Component({
-    selector: "app-root",
-    imports: [CommonModule, RouterOutlet, MatButton, MolViewComponent, MatLabel, MatSelect, MatOption, MatFormField, FormsModule, AtomInfoComponent],
-    templateUrl: "./app.component.html",
+  selector: "app-root",
+  imports: [CommonModule, RouterOutlet, MatButton, MolViewComponent, MatLabel, MatSelect, MatOption, MatFormField, FormsModule, AtomInfoComponent],
+  templateUrl: "./app.component.html",
     styleUrl: "./app.component.css"
 })
 
@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
   selectionMode: MolViewSelectionMode = "identify";
 
   pdbData: PdbData[] = [];
-  currentPdb: PdbData | null = null;
+  currentPdb: PdbData | undefined;
   selectedPdb: number = NaN;
   selectedAtomId: number = NaN;
   infoMessage: string = "";
@@ -66,7 +66,7 @@ export class AppComponent implements OnInit {
 
   onInfoChange(info: ContextInfo) {
     this.selectedAtomId = parseInt(info?.atoms?.[0]?.id?.replace("atom", ""));
-    this.infoMessage = info.message||"";
+    this.infoMessage = info.message || "";
     console.log(`Atom info changed: ${this.infoMessage}`);
   }
 

@@ -5,7 +5,7 @@ import {Apollo} from "apollo-angular";
 import {ATOM_INFO} from "../../graphql/atom-info.queries";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class AtomInfoService {
 
@@ -20,7 +20,7 @@ export class AtomInfoService {
     return this.apollo
       .query<any>({
         query: ATOM_INFO,
-        variables: { pdbId: pdbId, atomId: atomId }
+        variables: {pdbId: pdbId, atomId: atomId}
       })
       .pipe(
         map((result: ApolloQueryResult<any>) => result.data.atomInfo as string)

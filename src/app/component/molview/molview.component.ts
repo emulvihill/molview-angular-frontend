@@ -1,13 +1,12 @@
-import {AfterViewInit, Component, EventEmitter, Input, Output} from "@angular/core";
+import {AfterViewInit, Component, effect, input, output} from "@angular/core";
 import {ConstructorParams, ContextInfo, MolView, MolViewRenderMode, MolViewSelectionMode} from "wglmolview";
-import {MatCardModule} from "@angular/material/card";
 import {PdbData} from "../../model/pdb-data.model";
 
 @Component({
-    selector: "molview",
-    imports: [MatCardModule],
-    templateUrl: "./molview.component.html",
-    styleUrl: "./molview.component.css"
+  selector: "molview",
+  imports: [],
+  templateUrl: "./molview.component.html",
+  styleUrl: "./molview.component.css",
 })
 export class MolViewComponent implements AfterViewInit {
 
@@ -17,37 +16,37 @@ export class MolViewComponent implements AfterViewInit {
       onInfoUpdated: (info: ContextInfo) => this.infoUpdated.emit(info),
     };
 
+  pdbData = input<PdbData>();
+  renderMode = input.required<MolViewRenderMode>();
+  selectionMode = input.required<MolViewSelectionMode>();
+
+  infoUpdated = output<ContextInfo>();
+
   private mv?: MolView;
 
-  private _pdbData: PdbData | null = null;
-
   constructor() {
+
+    effect(() => {
+      const pdb = this.pdbData();
+      if (pdb) {
+        this.mv?.setPDBData(pdb.data);
+      } else {
+        this.mv?.init();
+      }
+    });
+
+    effect(() => {
+      const rm = this.renderMode();
+      this.mv?.setRenderMode(rm);
+    });
+
+    effect(() => {
+      const sm = this.selectionMode();
+      this.mv?.setSelectionMode(sm);
+    });
   }
 
   ngAfterViewInit(): void {
     this.mv = new MolView(this.params);
-  }
-
-  @Output() infoUpdated = new EventEmitter<ContextInfo>();
-
-  @Input() set pdbData(pdbData: PdbData | null) {
-    this._pdbData = pdbData;
-    if (this._pdbData) {
-      this.mv?.setPDBData(this._pdbData.data);
-    } else {
-      this.mv?.init();
-    }
-  }
-
-  get pdbData(): PdbData | null {
-    return this._pdbData;
-  }
-
-  @Input() set renderMode(mode: MolViewRenderMode) {
-    this.mv?.setRenderMode(mode);
-  }
-
-  @Input() set selectionMode(mode: MolViewSelectionMode) {
-    this.mv?.setSelectionMode(mode);
   }
 }
